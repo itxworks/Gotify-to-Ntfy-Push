@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  gotify:
+    image: gotify/server
+    container_name: gotify
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+
+  forwarder:
+    build: .
+    container_name: gotify-forwarder
+    restart: unless-stopped
+    env_file: .env
+    depends_on:
+      - gotify
