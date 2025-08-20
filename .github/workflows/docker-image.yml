@@ -19,25 +19,32 @@ jobs:
           password: ${{ secrets.DOCKER_PAT }}
 
       # Install latest buildx plugin (includes cloud driver support)
-      - name: Install Docker Buildx plugin
-        run: |
-          mkdir -p ~/.docker/cli-plugins
-          curl -sSL https://github.com/docker/buildx/releases/latest/download/buildx-linux-amd64 \
-            -o ~/.docker/cli-plugins/docker-buildx
-          chmod +x ~/.docker/cli-plugins/docker-buildx
-          docker buildx version
+      #- name: Install Docker Buildx plugin
+      #  run: |
+      #    mkdir -p ~/.docker/cli-plugins
+      #    curl -sSL https://github.com/docker/buildx/releases/latest/download/buildx-linux-amd64 \
+      #      -o ~/.docker/cli-plugins/docker-buildx
+      #    chmod +x ~/.docker/cli-plugins/docker-buildx
+      #    docker buildx version
 
       - name: Set up Docker Buildx (Cloud)
-        run: |
-          docker buildx create --name cloud-builder --driver cloud docker/${{ vars.DOCKER_USER }}/my-builder
-          docker buildx use cloud-builder
-          docker buildx inspect --bootstrap
-
+        #run: |
+        #  docker buildx create --name cloud-builder --driver cloud docker/${{ vars.DOCKER_USER }}/my-builder
+        #  docker buildx use cloud-builder
+        #  docker buildx inspect --bootstrap
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver: cloud
+          endpoint: "mp0185/my-builder"
+          install: true
+          
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
           tags: ${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:latest
-          cache-from: type=registry,ref=${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:cache
-          cache-to: type=registry,ref=${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:cache,mode=max
+          #cache-from: type=registry,ref=${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:cache
+          #cache-to: type=registry,ref=${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:cache,mode=max
+          outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry' }}
+          
