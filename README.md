@@ -1,7 +1,7 @@
 # Gotify-to-Ntfy-Push
 Push Gotify Messages over ntfy.sh to your (iOS) Devices.
 
-This small Go takes incomming Gotify Messages to Apps and forwards them to an ntfs.sh host with the given topic.
+This small Go takes incomming Gotify Messages and forwards them to an ntfs.sh host with the given app name as topic.
 
 ### Docker Compose
 ```
