@@ -1,0 +1,43 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PAT }}
+
+      # Install latest buildx plugin (includes cloud driver support)
+      - name: Install Docker Buildx plugin
+        run: |
+          mkdir -p ~/.docker/cli-plugins
+          curl -sSL https://github.com/docker/buildx/releases/latest/download/buildx-linux-amd64 \
+            -o ~/.docker/cli-plugins/docker-buildx
+          chmod +x ~/.docker/cli-plugins/docker-buildx
+          docker buildx version
+
+      - name: Set up Docker Buildx (Cloud)
+        run: |
+          docker buildx create --name cloud-builder --driver cloud docker/${{ vars.DOCKER_USER }}/my-builder
+          docker buildx use cloud-builder
+          docker buildx inspect --bootstrap
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: ${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:latest
+          cache-from: type=registry,ref=${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:cache
+          cache-to: type=registry,ref=${{ vars.DOCKER_USER }}/${{ github.event.repository.name }}:cache,mode=max
