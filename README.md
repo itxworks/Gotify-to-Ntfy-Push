@@ -45,3 +45,48 @@ NTFY_DEBUG=true
 
 TZ=Europe/Vienna
 ```
+## Debug Log Example
+
+```bash
+gotify  | Starting Gotify version 2.6.3@2025-04-27-09:10:38
+gotify  | Started listening for plain connection on tcp [::]:80
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] Using SplitTopics: true
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] Using auth token
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 Starting forwarder: Gotify=ws://gotify/stream -> ntfy=http://ntfy/gotify_alerts
+gotify               | 2025-08-20T14:58:55+02:00 | 200 |    2.142732ms |     172.30.0.13 | GET      "/application"
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 Got 4 apps:
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=1 Name=Proxmox Description=proxmox Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=2 Name=TueNas Description=TrueNas Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=3 Name=SSH Description=ssh login Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=4 Name=uptime-kuma Description=lan Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] Using auth token
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 Starting forwarder: Gotify=ws://gotify/stream -> ntfy=http://ntfy/gotify_alerts
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 Got 4 apps:
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=1 Name=Proxmox Description=proxmox Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=2 Name=TueNas Description=TrueNas Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=3 Name=SSH Description=ssh login Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 - ID=4 Name=uptime-kuma Description=lan Token=********
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [NTFY] Sent startup message with 4 apps
+gotify               | 2025-08-20T14:58:55+02:00 | 200 |    1.268852ms |     172.30.0.13 | GET      "/application"
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 Connected to Gotify stream
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [NTFY] Sent startup message with 4 apps
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 Connected to Gotify stream
+gotify               | 2025-08-20T14:58:55+02:00 | 200 |    3.831551ms |     172.30.0.13 | GET      "/stream"
+gotify               | 2025-08-20T14:58:55+02:00 | 200 |    2.156114ms |     172.30.0.13 | GET      "/application"
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): proxmox
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): proxmox
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: proxmox
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): tuenas
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: tuenas
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): ssh
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: ssh
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): uptime-kuma
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: uptime-kuma
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: proxmox
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): tuenas
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: tuenas
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): ssh
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: ssh
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic validated (no-op): uptime-kuma
+gotify-to-ntfy-push  | 2025/08/20 14:58:55 [DEBUG] [SYNC] Topic ready: uptime-kuma
+````
