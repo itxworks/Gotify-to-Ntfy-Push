@@ -41,7 +41,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
         with:
           #driver: cloud
-          endpoint: "mp0185/my-builder"
+          #endpoint: "mp0185/my-builder"
           install: true
           
       - name: Build and push
