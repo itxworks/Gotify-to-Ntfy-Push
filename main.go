@@ -463,6 +463,8 @@ func forwardToNtfy(cfg *Config, store *AppStore, msg GotifyMessage) error {
 	}
 
 	endpoint := strings.TrimRight(cfg.NtfyURL, "/") + "/" + url.PathEscape(strings.TrimLeft(appTopic, "/"))
+
+	// Use ONLY the message as the body, not including the title
 	payload := []byte(msg.Message) // fix issue display 2 titles ...
 
 	dbg(cfg, "Forwarding to ntfy URL: %s", endpoint)
@@ -473,6 +475,8 @@ func forwardToNtfy(cfg *Config, store *AppStore, msg GotifyMessage) error {
 	if err != nil {
 		return err
 	}
+
+	// Set the Title header separately (this becomes the notification title)
 	if msg.Title != "" {
 		req.Header.Set("Title", msg.Title)
 	}
