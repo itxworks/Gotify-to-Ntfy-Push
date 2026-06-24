@@ -463,7 +463,7 @@ func forwardToNtfy(cfg *Config, store *AppStore, msg GotifyMessage) error {
 	}
 
 	endpoint := strings.TrimRight(cfg.NtfyURL, "/") + "/" + url.PathEscape(strings.TrimLeft(appTopic, "/"))
-	payload := []byte(msg.Message) // fix issue displau 2 titles ...
+	payload := []byte(msg.Message) // fix issue display 2 titles ...
 
 	dbg(cfg, "Forwarding to ntfy URL: %s", endpoint)
 	dbg(cfg, "Payload:\n%s", payload)
