@@ -3,7 +3,7 @@ steps:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       registry: https://registry.itxworks.eu
-      repo: registry.itxworks.eu/notify-to-ntfy-push
+      repo: registry.itxworks.eu/gotify-to-ntfy-push
       tags:
         - latest
         - ${CI_COMMIT_SHA:0:8}
@@ -18,7 +18,7 @@ steps:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       registry: https://index.docker.io/v1/
-      repo: mp0185/notify-to-ntfy-push
+      repo: mp0185/gotify-to-ntfy-push
       tags:
         - latest
         - ${CI_COMMIT_SHA:0:8}
