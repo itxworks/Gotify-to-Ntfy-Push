@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
-ARG GO_VERSION=1.26.5
-ARG ALPINE_VERSION=3.23.5
+ARG GO_VERSION=1.27.0
+ARG ALPINE_VERSION=3.24.1
 
 ############################
 # Builder stage
@@ -25,7 +25,13 @@ FROM alpine:${ALPINE_VERSION}
 
 WORKDIR /app
 
-RUN apk add --no-cache ca-certificates tzdata git
+RUN apk update && \
+        apk upgrade --no-cache && \
+        apk add --no-cache \
+            ca-certificates  \
+            tzdata  \
+            git && \
+            rm -rf /var/cache/apk/* \
 
 COPY --from=builder /app/forwarder /forwarder
 
