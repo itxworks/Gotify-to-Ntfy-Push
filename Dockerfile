@@ -31,7 +31,7 @@ RUN apk update && \
             ca-certificates  \
             tzdata  \
             git && \
-            rm -rf /var/cache/apk/* \
+            rm -rf /var/cache/apk/*
 
 COPY --from=builder /app/forwarder /forwarder
 
